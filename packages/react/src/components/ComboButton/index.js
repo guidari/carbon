@@ -32,6 +32,7 @@ const ComboButton = React.forwardRef(function ComboButton(
   {
     children,
     className,
+    direction = 'bottom',
     disabled,
     label,
     onClick,
@@ -81,6 +82,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     `${prefix}--combo-button__container--${size}`,
     {
       [`${prefix}--combo-button__container--open`]: open,
+      [`${prefix}--combobutton-up`]: direction === 'top',
     },
     className
   );
@@ -144,6 +146,11 @@ ComboButton.propTypes = {
    * Additional CSS class names.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the direction of the combobutton. Can be either top or bottom.
+   */
+  direction: PropTypes.oneOf(['top', 'bottom']),
 
   /**
    * Specify whether the ComboButton should be disabled, or not.
