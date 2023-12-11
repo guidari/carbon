@@ -52,13 +52,11 @@
     inset-block-end: 2.5rem;
   }
 
-  // .#{$prefix}--combobutton-up.#{$prefix}--dropdown--sm .#{$prefix}--menu,
   .#{$prefix}--combobutton-up.#{$prefix}--menu-sm .#{$prefix}--menu,
   .#{$prefix}--combobutton-up .#{$prefix}--menu-sm .#{$prefix}--menu {
     inset-block-end: 2rem;
   }
 
-  // .#{$prefix}--combobutton-up.#{$prefix}--dropdown--lg .#{$prefix}--menu,
   .#{$prefix}--combobutton-up.#{$prefix}-menu-lg .#{$prefix}--menu,
   .#{$prefix}--combobutton-up .#{$prefix}-menu-lg .#{$prefix}--menu {
     inset-block-end: 3rem;
