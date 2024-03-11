@@ -85,6 +85,8 @@ export interface TagBaseProps {
    */
   slug?: ReactNodeLike;
 
+  text?: string;
+
   /**
    * @deprecated This property is deprecated and will be removed in the next major version. Use DismissibleTag instead.
    */
@@ -108,6 +110,7 @@ const Tag = <T extends React.ElementType>({
   type,
   filter, // remove filter in next major release - V12
   renderIcon: CustomIconElement,
+  text,
   title = 'Clear filter', // remove title in next major release - V12
   disabled,
   onClose, // remove onClose in next major release - V12
@@ -205,7 +208,12 @@ const Tag = <T extends React.ElementType>({
         ''
       )}
       <Text>
-        {children !== null && children !== undefined ? children : typeText}
+        {text
+          ? text
+          : children !== null && children !== undefined
+          ? children
+          : typeText}
+        {/* {children !== null && children !== undefined ? children : typeText} */}
       </Text>
       {normalizedSlug}
     </ComponentTag>
@@ -271,6 +279,8 @@ Tag.propTypes = {
    * **Experimental:** Provide a `Slug` component to be rendered inside the `Tag` component
    */
   slug: PropTypes.node,
+
+  text: PropTypes.string,
 
   /**
    * Text to show on clear filters

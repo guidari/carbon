@@ -30,8 +30,12 @@ export default {
 
 export const Selectable = (args) => {
   return (
-    <SelectableTag renderIcon={Asleep} className="some-class" {...args}>
-      {'Tag content'}
+    <SelectableTag
+      renderIcon={Asleep}
+      className="some-class"
+      {...args}
+      text="Tag">
+      {/* {'Tag content'} */}
     </SelectableTag>
   );
 };

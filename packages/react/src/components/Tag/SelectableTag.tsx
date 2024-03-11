@@ -17,11 +17,6 @@ const getInstanceId = setupGetInstanceId();
 
 export interface SelectableTagBaseProps {
   /**
-   * Provide content to be rendered inside of a `SelectableTag`
-   */
-  children?: React.ReactNode;
-
-  /**
    * Provide a custom className that is applied to the containing <span>
    */
   className?: string;
@@ -57,6 +52,11 @@ export interface SelectableTagBaseProps {
    * **Experimental:** Provide a `Slug` component to be rendered inside the `SelectableTag` component
    */
   slug?: ReactNodeLike;
+
+  /**
+   * Provide text to be rendered inside of a `SelectableTag`
+   */
+  text?: string;
 }
 
 export type SelectableTagProps<T extends React.ElementType> = PolymorphicProps<
@@ -65,11 +65,11 @@ export type SelectableTagProps<T extends React.ElementType> = PolymorphicProps<
 >;
 
 const SelectableTag = <T extends React.ElementType>({
-  children,
   className,
   disabled,
   id,
   renderIcon,
+  text,
   selected = false,
   slug,
   size,
@@ -101,11 +101,12 @@ const SelectableTag = <T extends React.ElementType>({
       renderIcon={renderIcon}
       disabled={disabled}
       className={tagClasses}
+      text={text}
       id={tagId}
       onClick={() => setSelectedTag(!selectedTag)}
       {...otherProps}>
       <div className={`${prefix}--interactive--tag-children`}>
-        {children}
+        {/* {children} */}
         {normalizedSlug}
       </div>
     </Tag>
@@ -154,6 +155,8 @@ SelectableTag.propTypes = {
    * **Experimental:** Provide a `Slug` component to be rendered inside the `SelectableTag` component
    */
   slug: PropTypes.node,
+
+  text: PropTypes.string,
 };
 
 export default SelectableTag;
