@@ -154,4 +154,22 @@ test.describe('@avt Button', () => {
 
     await expect(page).toHaveNoACViolations('Button-hover');
   });
+
+  // Assisted by WCA@IBM
+  // Latest GenAI contribution: ibm/granite-20b-code-instruct-v2
+  test('@avt-keyboard-nav - button', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Button',
+      id: 'components-button--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    const button = page.getByRole('button');
+
+    await expect(button).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(button).toBeFocused();
+  });
 });

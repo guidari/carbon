@@ -68,4 +68,22 @@ test.describe('@avt Link', () => {
       'iframe.html?id=components-link--default&viewMode=story&globals=theme:white#'
     );
   });
+
+  test('@avt-keyboard-nav - link', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Link',
+      id: 'components-link--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+
+    const link = page.getByRole('link');
+
+    await expect(link).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(link).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(link).toHaveAttribute('href', '#');
+  });
 });
