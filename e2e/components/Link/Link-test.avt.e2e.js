@@ -69,6 +69,8 @@ test.describe('@avt Link', () => {
     );
   });
 
+  // Assisted by WCA@IBM
+  // Latest GenAI contribution: ibm/granite-20b-code-instruct-v2
   test('@avt-keyboard-nav - link', async ({ page }) => {
     await visitStory(page, {
       component: 'Link',
