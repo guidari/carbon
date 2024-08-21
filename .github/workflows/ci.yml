@@ -2,10 +2,10 @@ name: ci
 on:
   push:
     branches:
-      - main
+      - main-codecov
   pull_request:
     branches:
-      - main
+      - main-codecov
   merge_group:
     types: [checks_requested]
 
