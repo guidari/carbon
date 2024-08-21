@@ -32,7 +32,7 @@ describe('Accordion', () => {
   });
 
   describe('automated verification testing', () => {
-    it('should have no Axe violations', async () => {
+    it('should have no Axe violations change', async () => {
       render(
         <Accordion className="extra-class">
           <AccordionItem className="child" title="Heading A">
