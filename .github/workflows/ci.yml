@@ -68,7 +68,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
@@ -95,7 +97,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
@@ -135,7 +139,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
@@ -198,7 +204,9 @@ jobs:
           path: |
             node_modules
             */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
@@ -239,29 +247,3 @@ jobs:
       - name: Check AVT Runner job status
         if: ${{ needs.avt-runner.result != 'success' }}
         run: exit 1
-  on:
-  push:
-    paths:
-      - "packages/react/src/components/**"
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    name: Test JS frontend
-    defaults:
-      run:
-        working-directory: ./packages/react/src/components
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "20"
-      - name: Install requirements
-        run: npm install
-      - name: Run tests and collect coverage
-        run: npm run test
-      - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@v4.2.0
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        with:
-          flags: jest-components
