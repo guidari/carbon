@@ -1,0 +1,16 @@
+coverage:
+  status:
+    project: off
+    patch: off
+
+flag_management:
+  default_rules:
+    carryforward: true
+  individual_flags:
+    - name: jest-components
+      paths:
+        - packages/react/src/components/
+      statuses:
+        - type: project
+          target: auto
+          threshold: 1%
