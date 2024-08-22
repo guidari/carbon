@@ -9,7 +9,7 @@ flag_management:
   individual_flags:
     - name: jest-components
       paths:
-        - packages/react/src/components/
+        - packages/react/src/components/**/*-test.js
       statuses:
         - type: project
           target: auto

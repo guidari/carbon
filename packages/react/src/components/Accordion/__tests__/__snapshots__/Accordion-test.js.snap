@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Accordion should render 1`] = `
+exports[`Accordion should render test 1`] = `
 <DocumentFragment>
   <ul
     class="cds--accordion extra-class cds--accordion--end"
