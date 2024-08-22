@@ -251,9 +251,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Test JS frontend
-    defaults:
-      run:
-        working-directory: ./packages/react/src/components
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v2
