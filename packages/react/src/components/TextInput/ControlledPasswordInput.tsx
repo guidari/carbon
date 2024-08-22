@@ -189,6 +189,7 @@ const ControlledPasswordInput = React.forwardRef(
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--test-class`]: true,
     });
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: disabled,
