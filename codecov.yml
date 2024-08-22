@@ -1,16 +1,13 @@
 coverage:
   status:
-    project: off
-    patch: off
-
-flag_management:
-  default_rules:
-    carryforward: true
-  individual_flags:
-    - name: jest-components
-      paths:
-        - packages/react/src/components/**/*-test.js
-      statuses:
-        - type: project
-          target: auto
-          threshold: 1%
+    project:
+      default:
+        target: 100%
+        threshold: 1%
+  ignore:
+    - 'packages/react/src/__tests__'
+    - 'packages/react/src/internal'
+    - 'packages/react/src/prop-types'
+    - 'packages/react/src/tools'
+    - 'packages/react/src/types'
+    - 'packages/react/src/__tests__'
