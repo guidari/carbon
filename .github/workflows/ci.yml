@@ -248,7 +248,6 @@ jobs:
         if: ${{ needs.avt-runner.result != 'success' }}
         run: exit 1
 
-jobs:
   build:
     runs-on: ubuntu-latest
     name: Test JS frontend
