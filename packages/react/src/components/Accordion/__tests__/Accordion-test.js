@@ -13,7 +13,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('Accordion', () => {
-  it('should render', () => {
+  it('should render test 2', () => {
     const { asFragment } = render(
       <Accordion className="extra-class">
         <AccordionItem className="child" title="Heading A">
