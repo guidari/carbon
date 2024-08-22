@@ -4,5 +4,10 @@ coverage:
       default:
         target: 100%
         threshold: 1%
-      - name: jest-components
-      paths: packages/react/src/components/
+  ignore:
+    - 'packages/react/src/__tests__'
+    - 'packages/react/src/internal'
+    - 'packages/react/src/prop-types'
+    - 'packages/react/src/tools'
+    - 'packages/react/src/types'
+    - 'packages/react/src/__tests__'
