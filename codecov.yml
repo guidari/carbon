@@ -1,12 +1,13 @@
 coverage:
   status:
     project:
-      components:
+      default:
+        target: 100%
+        threshold: 1%
         paths:
           - tests/components
           - packages/react/src/components*
-        target: 100%
-        threshold: 1%
+
   ignore:
     - 'packages/react/src/__tests__'
     - 'packages/react/src/internal'
