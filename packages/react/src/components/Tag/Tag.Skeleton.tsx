@@ -31,7 +31,7 @@ function TagSkeleton({ className, size, ...rest }: TagSkeletonProps) {
     `${prefix}--skeleton`,
     className,
     {
-      [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class a
       [`${prefix}--layout--size-${size}`]: size,
     }
   );
