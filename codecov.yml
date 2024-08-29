@@ -1,13 +1,8 @@
 coverage:
   status:
     project:
-      default:
+      components:
         target: 100%
         threshold: 1%
-  ignore:
-    - 'packages/react/src/__tests__'
-    - 'packages/react/src/internal'
-    - 'packages/react/src/prop-types'
-    - 'packages/react/src/tools'
-    - 'packages/react/src/types'
-    - 'packages/react/src/__tests__'
+        paths:
+          - packages/react/src/components/
