@@ -115,7 +115,7 @@ const Tag = React.forwardRef(function Tag<T extends React.ElementType>(
     className,
     id,
     type,
-    filter, // remove filter in next major release - V12
+    filter, // remove filter in next major release - V12 a
     renderIcon: CustomIconElement,
     title = 'Clear filter', // remove title in next major release - V12
     disabled,
