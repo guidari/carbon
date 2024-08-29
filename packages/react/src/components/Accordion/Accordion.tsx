@@ -65,7 +65,6 @@ function Accordion({
     [`${prefix}--accordion--${align}`]: align,
     [`${prefix}--accordion--${size}`]: size, // TODO: V12 - Remove this class
     [`${prefix}--layout--size-${size}`]: size,
-    [`${prefix}--layout--test-${size}`]: size,
     [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
   const ListTag = ordered ? 'ol' : 'ul';
