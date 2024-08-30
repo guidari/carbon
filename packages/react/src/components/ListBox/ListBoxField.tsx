@@ -33,7 +33,7 @@ function ListBoxField({
 }: ListBoxFieldProps) {
   const prefix = usePrefix();
 
-  const sumTest = (x, y) => {
+  const sumTestCodecov = (x, y) => {
     const result = x + y;
     return result;
   };
