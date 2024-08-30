@@ -81,7 +81,6 @@ jobs:
       - name: Run tests
         run: yarn test --ci --collectCoverage
     
-
   codecov:
     needs: test
       runs-on: ubuntu-latest
