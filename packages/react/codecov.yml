@@ -5,4 +5,4 @@ coverage:
         target: 100%
         threshold: 1%
         paths:
-          - packages/react/src/components/
+          - src/components/
