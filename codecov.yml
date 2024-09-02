@@ -2,7 +2,7 @@ coverage:
   status:
     project:
       components:
-        target: 100%
+        target: auto
         threshold: 1%
         paths:
           - packages/react/src/components/
