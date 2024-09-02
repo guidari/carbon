@@ -2,10 +2,10 @@ name: ci
 on:
   push:
     branches:
-      - main
+      - main-codecov
   pull_request:
     branches:
-      - main
+      - main-codecov
   merge_group:
     types: [checks_requested]
 
@@ -80,13 +80,6 @@ jobs:
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
         run: yarn test --ci --collectCoverage
-
-  codecov:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: install Codecov
-        run: yarn global add codecov
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v4.2.0
         env:
