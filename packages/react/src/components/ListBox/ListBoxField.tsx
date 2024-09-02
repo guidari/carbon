@@ -33,11 +33,6 @@ function ListBoxField({
 }: ListBoxFieldProps) {
   const prefix = usePrefix();
 
-  function test(x, y) {
-    const result = x + y;
-    return result;
-  }
-
   return (
     <div
       className={`${prefix}--list-box__field`}
@@ -51,7 +46,7 @@ function ListBoxField({
 ListBoxField.propTypes = {
   /**
    * Typically set by `getToggleButtonProps`, this should specify whether the
-   * field has a popup.
+   * field has a popup.a
    */
   'aria-haspopup': PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
