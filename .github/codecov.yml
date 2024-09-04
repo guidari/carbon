@@ -15,8 +15,56 @@ component_management:
     - component_id: core_components # this is an identifier that should not be changed
       name: components # this is a display name, and can be changed freely
       paths:
-        - ../packages/react/src/components/**
+        - ../packages/react/**
     - component_id: colors
       name: colors
       paths:
-        - ../packages/react/src/colors/**
+        - ../packages/colors/**
+    - component_id: elements
+      name: elements
+      paths:
+        - ../packages/elements/**
+    - component_id: feature-flags
+      name: feature-flags
+      paths:
+        - ../packages/feature-flags/**
+    - component_id: grid
+      name: grid
+      paths:
+        - ../packages/grid/**
+    - component_id: icon-helpers
+      name: icon-helpers
+      paths:
+        - ../packages/icon-helpers/**
+    - component_id: layout
+      name: layout
+      paths:
+        - ../packages/layout/**
+    - component_id: motion
+      name: motion
+      paths:
+        - ../packages/motion/**
+    - component_id: scss-generator
+      name: scss-generator
+      paths:
+        - ../packages/scss-generator/**
+    - component_id: styles
+      name: styles
+      paths:
+        - ../packages/styles/**
+    - component_id: test-utils
+      name: test-utils
+      paths:
+        - ../packages/test-utils/**
+    - component_id: themes
+      name: themes
+      paths:
+        - ../packages/themes/**
+    - component_id: type
+      name: type
+      paths:
+        - ../packages/type/**
+    - component_id: upgrade
+      name: upgrade
+      paths:
+        - ../packages/upgrade/**
