@@ -15,8 +15,8 @@ component_management:
     - component_id: core_components # this is an identifier that should not be changed
       name: components # this is a display name, and can be changed freely
       paths:
-        - ../packages/react/src/components
+        - ../packages/react/src/components/**
     - component_id: colors
       name: colors
       paths:
-        - ../packages/react/src/colors
+        - ../packages/react/src/colors/**
