@@ -1,0 +1,22 @@
+coverage:
+  status:
+    project: yes
+    patch: yes
+
+component_management:
+  default_rules: # default rules that will be inherited by all components
+    statuses:
+      - type: project # in this case every component that doens't have a status defined will have a project type one
+        target: auto
+        threshold: 1%
+        branches:
+          - '!main'
+  individual_components:
+    - component_id: core_components # this is an identifier that should not be changed
+      name: components # this is a display name, and can be changed freely
+      paths:
+        - ../packages/react/src/components
+    - component_id: colors
+      name: colors
+      paths:
+        - ../packages/react/src/colors
