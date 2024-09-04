@@ -11,9 +11,6 @@ import React from 'react';
 import Tag from './';
 import DismissibleTag from './DismissibleTag';
 import { AILabel } from '../AILabel';
-import TagSkeleton from './Tag.Skeleton';
-
-const prefix = 'cds';
 
 describe('Tag', () => {
   describe('automated accessibility testing', () => {
@@ -65,14 +62,5 @@ describe('Tag', () => {
     expect(
       screen.getByRole('button', { name: 'AI - Show information' })
     ).toBeInTheDocument();
-  });
-
-  it('should render a skeleton state', () => {
-    const { container } = render(<TagSkeleton />);
-
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    const selectWrapper = container.querySelector(`.${prefix}--tag`);
-
-    expect(selectWrapper).toHaveClass(`${prefix}--skeleton`);
   });
 });

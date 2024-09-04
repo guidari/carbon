@@ -479,7 +479,7 @@ const MultiSelect = React.forwardRef(
     };
 
     /**
-     * programmatically control this `open` propA
+     * programmatically control this `open` prop
      */
     if (prevOpenProp !== open) {
       setIsOpenWrapper(open);

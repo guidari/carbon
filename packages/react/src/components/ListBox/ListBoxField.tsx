@@ -33,11 +33,6 @@ function ListBoxField({
 }: ListBoxFieldProps) {
   const prefix = usePrefix();
 
-  const sumTest = (x, y) => {
-    const result = x + y;
-    return result;
-  };
-
   return (
     <div
       className={`${prefix}--list-box__field`}

@@ -47,6 +47,280 @@ describe('MultiSelect', () => {
       await expect(container).toHaveNoACViolations('MultiSelect');
     });
   });
+  it('does not render items with undefined values', async () => {
+    const items = [{ text: 'joey' }, { text: 'johnny' }, { text: undefined }];
+    const label = 'test-label';
+    render(
+      <MultiSelect
+        id="custom-id"
+        label={label}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    );
+    await waitForPosition();
+
+    const labelNode = screen.getByRole('combobox');
+    await userEvent.click(labelNode);
+
+    expect(screen.getByRole('option', { name: 'joey' })).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'johnny' })).toBeInTheDocument();
+    expect(
+      screen.queryByRole('option', { name: 'undefined' })
+    ).not.toBeInTheDocument();
+  });
+
+  it('should initially render with a given label', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect id="test" label={label} items={items} />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const labelNode = getByText(container, label);
+    expect(isElementVisible(labelNode)).toBe(true);
+
+    expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeNull();
+  });
+
+  it('should open the menu when a user clicks on the label', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect id="test" label={label} items={items} />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const labelNode = getByText(container, label);
+    await userEvent.click(labelNode);
+
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-haspopup',
+      'listbox'
+    );
+  });
+
+  it('should open the menu when a user hits space while the field is focused', async () => {
+    const items = generateItems(4, generateGenericItem);
+    render(<MultiSelect id="test" label="test-label" items={items} />);
+    await waitForPosition();
+
+    await userEvent.tab();
+    await userEvent.keyboard('[Space]');
+
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-haspopup',
+      'listbox'
+    );
+  });
+
+  it('should open the menu when a user hits enter while the field is focused', async () => {
+    const items = generateItems(4, generateGenericItem);
+    render(<MultiSelect id="test" label="test-label" items={items} />);
+    await waitForPosition();
+
+    await userEvent.tab();
+    await userEvent.keyboard('[Enter]');
+
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-expanded',
+      'true'
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-haspopup',
+      'listbox'
+    );
+  });
+
+  it('should let the user toggle item selection with a mouse', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect id="test" label={label} items={items} />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const labelNode = getByText(container, label);
+    await userEvent.click(labelNode);
+
+    const [item] = items;
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const itemNode = getByText(container, item.label);
+
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelector('[aria-selected="true"][role="option"]')
+    ).toBeNull();
+
+    await userEvent.click(itemNode);
+
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
+
+    await userEvent.click(itemNode);
+
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
+  });
+
+  it('should close the menu when the user hits the Escape key', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const { container } = render(
+      <MultiSelect id="test" label="test-label" items={items} />
+    );
+
+    await userEvent.tab();
+    await userEvent.keyboard('[Space]');
+
+    expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeInstanceOf(HTMLElement);
+
+    await userEvent.keyboard('[Escape]');
+
+    expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeNull();
+  });
+
+  it('close menu with click outside of field', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect id="test" label={label} items={items} />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const labelNode = getByText(container, label);
+
+    expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeFalsy();
+
+    await userEvent.click(labelNode);
+
+    expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeTruthy();
+
+    await userEvent.click(document.body);
+
+    expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeFalsy();
+  });
+
+  it('should toggle selection with enter', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect id="test" label={label} items={items} />
+    );
+    await waitForPosition();
+
+    await userEvent.tab();
+    await userEvent.keyboard('[Space]');
+
+    const [item] = items;
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const itemNode = getByText(container, item.label);
+
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
+
+    await userEvent.keyboard('[Enter]');
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.keyboard('[Enter]');
+
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
+  });
+
+  it('should clear selected items when the user clicks the clear selection button', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect id="test" label={label} items={items} />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const labelNode = getByText(container, label);
+    await userEvent.click(labelNode);
+
+    const [item] = items;
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const itemNode = getByText(container, item.label);
+    await userEvent.click(itemNode);
+
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelector('[aria-label="Clear all selected items"]')
+    ).toBeTruthy();
+
+    await userEvent.click(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelector('[aria-label="Clear all selected items"]')
+    );
+
+    expect(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.querySelector('[aria-label="Clear all selected items"]')
+    ).toBeFalsy();
+  });
+
+  it('should not be interactive if disabled', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect id="test" disabled label={label} items={items} />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const labelNode = getByText(container, label);
+    await userEvent.click(labelNode);
+
+    expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeFalsy();
+  });
+
+  it('should not be interactive if readonly', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect id="test" readOnly={true} label={label} items={items} />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/prefer-screen-queries
+    const labelNode = getByText(container, label);
+    await userEvent.click(labelNode);
+
+    expect(
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeFalsy();
+  });
 
   describe('Component API', () => {
     it('should set the default selected items with the `initialSelectedItems` prop', async () => {
