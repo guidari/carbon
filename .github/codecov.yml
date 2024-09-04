@@ -7,6 +7,9 @@ coverage:
       default:
         informational: true
 
+comment:
+  require_changes: true # if true: only post the comment if coverage changes
+
 component_management:
   default_rules: # default rules that will be inherited by all components
     statuses:
