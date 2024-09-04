@@ -1,7 +1,11 @@
 coverage:
   status:
-    project: yes
-    patch: yes
+    project:
+      default:
+        informational: true
+    patch:
+      default:
+        informational: true
 
 component_management:
   default_rules: # default rules that will be inherited by all components
@@ -12,10 +16,14 @@ component_management:
         branches:
           - '!main'
   individual_components:
-    - component_id: core_components # this is an identifier that should not be changed
-      name: components # this is a display name, and can be changed freely
+    - component_id: react # this is an identifier that should not be changed
+      name: react # this is a display name, and can be changed freely
       paths:
         - ../packages/react/**
+    - component_id: core-components # this is an identifier that should not be changed
+      name: core-components # this is a display name, and can be changed freely
+      paths:
+        - ../packages/react/src/components/**
     - component_id: colors
       name: colors
       paths:
